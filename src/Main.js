@@ -1,38 +1,22 @@
-import React,{ useEffect, useState } from "react";
+
 import { FaTimes } from "react-icons/fa";
-const url = 'https://api.github.com/users';
 
 
-function Main (){
 
-    const [githubuser, setgithubuser] = useState([]);
+function Main ({githubuser,removeItem , } ){
 
    
-    
-    
-
-    useEffect (() => {
-        async  function gitusers (){
-            const data = await fetch (url);
-            const result = await data.json();
-                setgithubuser(result) }
-
-        gitusers();
-
-   },[]);
-
-   function removeItem (id) {
-    let items = githubuser.filter((profile) => profile.id !== id);
-    setgithubuser (items);
-
-   }
- 
     return (
-        <div className="main-element">
+
+        <main>
+        {githubuser.length ? (
             
+        <div className="main-element">
+           
         {githubuser.map ((profile) =>{
             const {id, login, avatar_url, html_url } = profile
             return(
+                
                 <div className="gitusers">
                 <figure key={id}>
                     <img  src={avatar_url} alt={login} className="images" />
@@ -44,13 +28,14 @@ function Main (){
                 </div>
                 </div>
             )
-        })}
-        
-        
+            })}
       </div>
+      ) :(<p>Your list is empty</p> )}
+     </main>
+    );
 
-    )
-}
+        }
+        
   
 
 export default Main

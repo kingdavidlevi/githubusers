@@ -4,20 +4,22 @@ import {FaBars} from 'react-icons/fa';
 import { FaMicrophone } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import { FaBell } from 'react-icons/fa';
-function Header (){
+function Header ({handleinput, inputtext}){
+
+    
     return(
         <div className='header'>
             <div>
-            <FaBars className='bars' /> 
+            <FaBars className='bars'  /> 
             <FaGithub className='git'/>
            < span className='hub'> <strong> Github </strong></span>
             </div>
         
-            <div className='input-box'>
+            <div className='input-box' >
             <div className='search'>
              <FaSearch  /> 
              </div>
-           <div><input type='text' placeholder='search...' className='input'  /> </div> 
+           <div><input type='text' placeholder='search...' className='input' onChange={handleinput} value={inputtext}/> </div> 
             <div className='microphone-container'><FaMicrophone  className='microphone'/></div>
             </div>
             
