@@ -5,19 +5,20 @@ import SideBar from './Sidebar'
 import Main from './Main';
 function App() {
   const url = 'https://api.github.com/users';
-  const [inputtext, setInputText] = useState('')
+  const [inputtext, setInputText] = useState('');
   const [githubuser, setgithubuser] = useState([]);
-  
+  const [shownav, setShowNav] = useState(true);
    
     
     
 
   useEffect (() => {
       async  function gitusers (){
+        
           const data = await fetch (url);
           const result = await data.json();
               setgithubuser(result) }
-
+        
       gitusers();
 
  },[]);
@@ -28,17 +29,29 @@ function App() {
 
  }
 
- const handleinput = (event) =>{
-  console.log (setInputText(event.target.value))
- }
+ const handleInput = (event) =>{
+ const userInput = event.target.value
+  setInputText(userInput);
 
+  const matchresult = githubuser.filter ((selected) => ( selected.toLowerCase()).includes(userInput.toLowerCase())
+  
+  );
+  setgithubuser(matchresult)
+ }
+  const navigate = () => {
+    setShowNav(prevNav => !prevNav)
+  }
+
+  const handlesubmit = (event) =>{
+   event.preventDefault()
+  }
   
   return (
 
     <>
-   <Header handleinput={handleinput} inputtext= {inputtext}/>
+   <Header handleInput={handleInput} inputtext= {inputtext} navigate={navigate} githubuser={githubuser} handlesubmit={handlesubmit}/>
 
-   <SideBar />
+   <SideBar navigate={navigate} shownav={shownav} />
    <Main removeItem={removeItem} githubuser={githubuser} />
     </>
   );

@@ -8,8 +8,8 @@ function Main ({githubuser,removeItem , } ){
    
     return (
 
-        <main>
-        {githubuser.length ? (
+        <section>
+        
             
         <div className="main-element">
            
@@ -17,8 +17,8 @@ function Main ({githubuser,removeItem , } ){
             const {id, login, avatar_url, html_url } = profile
             return(
                 
-                <div className="gitusers">
-                <figure key={id}>
+                <div className="gitusers" key={id}>
+                <figure >
                     <img  src={avatar_url} alt={login} className="images" />
                     <figcaption><strong>{login}</strong></figcaption>
                     <a href={html_url} className="anchor">Profile</a>
@@ -30,8 +30,8 @@ function Main ({githubuser,removeItem , } ){
             )
             })}
       </div>
-      ) :(<p>Your list is empty</p> )}
-     </main>
+    
+     </section>
     );
 
         }
