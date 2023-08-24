@@ -29,27 +29,31 @@ function App() {
 
  }
 
- const handleInput = (event) =>{
- const userInput = event.target.value
-  setInputText(userInput);
+  const handleInput = (event) =>{
+     const userInput = event.target.value;
 
-  const matchresult = githubuser.filter ((selected) => ( selected.toLowerCase()).includes(userInput.toLowerCase())
-  
-  );
-  setgithubuser(matchresult)
- }
+     setInputText(userInput)
+  }
+     useEffect(()=> {
+    const matchResult = githubuser.filter((users) => users.login.toLowerCase().includes(inputtext.toLocaleLowerCase()))
+    setgithubuser(matchResult) 
+    
+  },[inputtext,setgithubuser])
+
   const navigate = () => {
     setShowNav(prevNav => !prevNav)
   }
 
   const handlesubmit = (event) =>{
-   event.preventDefault()
-  }
-  
+    event.preventDefault()
+ 
+    
+   }
+   
   return (
 
     <>
-   <Header handleInput={handleInput} inputtext= {inputtext} navigate={navigate} githubuser={githubuser} handlesubmit={handlesubmit}/>
+   <Header handleInput={handleInput} inputtext= {inputtext} navigate={navigate} githubuser={githubuser} handlesubmit={handlesubmit} />
 
    <SideBar navigate={navigate} shownav={shownav} />
    <Main removeItem={removeItem} githubuser={githubuser} />
